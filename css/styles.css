@@ -11,7 +11,9 @@
   --muted: #9a9ca1;
   --border: #2a2a2e;
 
+  --ember: #ff8a1f;
   --chrome: linear-gradient(180deg, #ffffff 0%, #d9dce0 45%, #8e9196 55%, #f3f4f6 100%);
+  --fire-line: linear-gradient(90deg, #d71920, #ff8a1f, #ffd27a, #ff8a1f, #d71920, #ff8a1f, #ffd27a, #ff8a1f, #d71920);
   --radius: 10px;
   --font-display: "Rajdhani", "Arial Narrow", sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -89,17 +91,25 @@ a { color: inherit; }
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  padding: 3rem 0 5rem;
+  padding: 3rem 0 7rem;
   text-align: center;
   background:
     radial-gradient(ellipse at 50% 30%, rgba(215, 25, 32, 0.18), transparent 60%),
+    radial-gradient(ellipse 80% 40% at 50% 110%, rgba(255, 90, 20, 0.28), transparent 70%),
     var(--black);
   overflow: hidden;
 }
 .hero::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
-  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 2;
+  background: var(--fire-line);
+  background-size: 200% 100%;
+  animation: fireline 3s linear infinite;
+  box-shadow: 0 0 18px rgba(255, 120, 30, 0.7);
 }
+.hero-inner { position: relative; } /* no z-index: keeps the logo blend mode seeing the fire canvas */
+.hero-fire { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.fx-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 200; }
+@keyframes fireline { to { background-position: -200% 0; } }
 .hero-logo { width: min(760px, 100%); aspect-ratio: 2.4 / 1; object-fit: cover; margin: 0 auto 0.5rem; }
 .hero-title {
   margin: 0 0 1rem;
@@ -112,7 +122,15 @@ a { color: inherit; }
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
 }
-.hero-title .text-red { background: none; -webkit-text-fill-color: var(--red); color: var(--red); }
+.hero-title .text-red {
+  display: inline-block;
+  background: none; -webkit-text-fill-color: var(--red); color: var(--red);
+  animation: heat 2.6s ease-in-out infinite;
+}
+@keyframes heat {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 90, 20, 0.55)); }
+  50% { filter: drop-shadow(0 0 18px rgba(255, 130, 30, 0.95)); }
+}
 .hero-sub { max-width: 640px; margin: 0 auto 2rem; color: var(--silver); font-size: 1.15rem; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
@@ -160,16 +178,53 @@ a { color: inherit; }
 /* ===== Cards ===== */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
 .card {
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
   background: var(--black-3);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--red);
   border-radius: var(--radius);
-  padding: 1.75rem 1.5rem;
+  padding: 1.95rem 1.5rem 1.5rem;
   transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
-.card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); border-color: #3a3a40; border-top-color: var(--red); }
+/* Top bar: solid red at rest, moving fire on hover */
+.card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: var(--red);
+}
+.card:hover::before, .card:focus-within::before {
+  height: 4px;
+  background: var(--fire-line);
+  background-size: 200% 100%;
+  animation: fireline 1.4s linear infinite;
+  box-shadow: 0 0 14px rgba(255, 120, 30, 0.8);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #3a3a40;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 90, 20, 0.22), inset 0 -50px 60px -50px rgba(255, 90, 20, 0.45);
+}
+.card:has(.card-link:focus-visible) { outline: 2px solid var(--ember); outline-offset: 3px; }
 .card h3 { margin: 0.75rem 0 0.5rem; font-family: var(--font-display); font-size: 1.4rem; color: var(--silver-light); }
 .card p { margin: 0; color: var(--muted); }
+/* The whole card is clickable via the heading button's stretched hit area */
+.card-link {
+  padding: 0; border: 0; background: none;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+}
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card-link:focus-visible { outline: none; }
+.card-more {
+  margin-top: auto; padding-top: 1.1rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--red);
+  transition: color 0.2s;
+}
+.card-more .arrow { display: inline-block; transition: transform 0.2s; }
+.card:hover .card-more { color: var(--ember); }
+.card:hover .card-more .arrow { transform: translateX(5px); }
 .card-icon {
   width: 52px; height: 52px; display: grid; place-items: center;
   border-radius: 50%;
@@ -274,13 +329,84 @@ a.contact-line:hover { color: var(--red); }
 }
 .copyright { margin: 0; color: var(--muted); font-size: 0.9rem; }
 
+/* ===== Service detail popup ===== */
+html:has(.svc-modal[open]) { overflow: hidden; }
+.svc-modal {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background: transparent; color: var(--text);
+}
+.svc-modal[open] { display: flex; padding: 16px; overflow-y: auto; }
+.svc-modal::backdrop { background: rgba(5, 5, 6, 0.8); backdrop-filter: blur(4px); }
+.svc-panel {
+  position: relative;
+  width: min(660px, 100%);
+  margin: auto;
+  padding: 2.25rem 2rem 2rem;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, rgba(215, 25, 32, 0.22), transparent 60%), var(--black-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 60px rgba(215, 25, 32, 0.35), 0 30px 80px rgba(0, 0, 0, 0.7);
+  animation: panelIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.svc-panel::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+  background: var(--fire-line);
+  background-size: 200% 100%;
+  animation: fireline 1.6s linear infinite;
+  box-shadow: 0 0 14px rgba(255, 120, 30, 0.8);
+}
+@keyframes panelIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
+.svc-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border); border-radius: 50%;
+  background: var(--black);
+  color: var(--silver-light); font-size: 1.6rem; line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.svc-close:hover, .svc-close:focus-visible { border-color: var(--red); color: var(--red); outline: none; }
+.svc-head { display: flex; align-items: center; gap: 1rem; padding-right: 2.5rem; }
+.svc-head .card-icon { flex: none; }
+.svc-head h2 {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.1;
+  text-transform: uppercase;
+  background: var(--chrome);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.svc-body { margin-top: 1.25rem; color: var(--silver); }
+.svc-body .svc-lead { margin: 0; font-size: 1.1rem; color: var(--silver-light); }
+.svc-body h4 {
+  margin: 1.6rem 0 0.6rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red);
+}
+.svc-body ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+.svc-body li { position: relative; padding-left: 1.4rem; }
+.svc-body li::before {
+  content: ""; position: absolute; left: 0; top: 0.6em;
+  width: 0.55rem; height: 0.55rem; border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 8px rgba(255, 120, 30, 0.8);
+}
+.svc-body .svc-note { margin: 1.4rem 0 0; font-style: italic; color: var(--muted); }
+.svc-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
 /* ===== Reveal on scroll ===== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
+.card.reveal.visible:hover { transform: translateY(-4px); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .bolt { animation: none; }
+  .bolt, .hero::after, .hero-title .text-red, .card::before, .svc-panel, .svc-panel::before { animation: none !important; }
 }
 
 /* ===== Responsive ===== */
@@ -306,6 +432,8 @@ a.contact-line:hover { color: var(--red); }
 @media (max-width: 520px) {
   .form-row { grid-template-columns: 1fr; }
   .quote-form { padding: 1.25rem; }
+  .svc-panel { padding: 2rem 1.25rem 1.5rem; }
+  .svc-actions .btn { flex: 1 1 100%; text-align: center; }
   .brand-logo { height: 52px; }
   .section { padding: 3.5rem 0; }
 }

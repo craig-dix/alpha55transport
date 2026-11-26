@@ -81,36 +81,113 @@
         <p class="section-lead">If it fits in the trailer and weighs under 7,500 lbs, we can get it from A to B.</p>
 
         <div class="card-grid">
-          <article class="card">
+          <!--
+            Each card opens a detail popup. Edit the popup text inside the
+            <div class="card-details"> of each card. data-quote must match one
+            of the <option> values in the quote form's "What are we hauling?" list.
+          -->
+          <article class="card" data-quote="Express LTL / Freight">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
             </div>
-            <h3>Express LTL</h3>
+            <h3><button type="button" class="card-link" aria-haspopup="dialog">Express LTL</button></h3>
             <p>Our core service. Time-sensitive, less-than-truckload freight picked up and delivered direct &mdash; no hub transfers, no waiting on a full load.</p>
+            <span class="card-more" aria-hidden="true">Learn more <span class="arrow">&rarr;</span></span>
+            <div class="card-details" hidden>
+              <p class="svc-lead">When a shipment can&rsquo;t wait for a consolidated truckload, Alpha55 runs it direct. We pick up at your dock and drive straight to the destination &mdash; your freight is the only stop on the route.</p>
+              <h4>What&rsquo;s Included</h4>
+              <ul>
+                <li>Direct, dock-to-dock pickup and delivery &mdash; no terminals or cross-docking</li>
+                <li>Same-day and next-day runs across Ohio, Michigan and Indiana</li>
+                <li>Palletized, crated or loose freight up to 7,500 lbs</li>
+                <li>Fully enclosed, lockable trailers that keep freight dry and secure</li>
+                <li>Updates straight from the driver, from pickup through delivery</li>
+              </ul>
+              <h4>A Good Fit For</h4>
+              <ul>
+                <li>Rush orders and expedited replenishment</li>
+                <li>Shipments too small for a full truck but too important to wait</li>
+                <li>Hot-shot runs between plants, warehouses and job sites</li>
+              </ul>
+            </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-quote="Machinery / Parts">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
             </div>
-            <h3>Manufacturers &amp; Machine Shops</h3>
+            <h3><button type="button" class="card-link" aria-haspopup="dialog">Manufacturers &amp; Machine Shops</button></h3>
             <p>Parts, tooling, fixtures and finished goods moved between shops, suppliers and customers when production can&rsquo;t wait.</p>
+            <span class="card-more" aria-hidden="true">Learn more <span class="arrow">&rarr;</span></span>
+            <div class="card-details" hidden>
+              <p class="svc-lead">We know what downtime costs. Alpha55 keeps parts, tooling and finished goods moving between shops, suppliers and customers so your production schedule doesn&rsquo;t slip.</p>
+              <h4>What&rsquo;s Included</h4>
+              <ul>
+                <li>Parts, castings, tooling, dies and fixtures</li>
+                <li>Finished goods delivered to customers and distributors</li>
+                <li>Outside-process runs &mdash; heat treat, plating, coating, grinding and back</li>
+                <li>Recurring scheduled routes or on-call runs</li>
+                <li>Load securement for heavy, dense and oddly shaped items</li>
+              </ul>
+              <h4>A Good Fit For</h4>
+              <ul>
+                <li>Machine shops, fabricators and job shops</li>
+                <li>OEMs and tier suppliers</li>
+                <li>Purchasing and production managers who need a dependable go-to carrier</li>
+              </ul>
+            </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-quote="Vehicle">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l2-5h14l2 5v3H3z"/><path d="M6 10l1.5-3h9L18 10"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
             </div>
-            <h3>Vehicles</h3>
+            <h3><button type="button" class="card-link" aria-haspopup="dialog">Vehicles</button></h3>
             <p>Cars, motorcycles, ATVs and small equipment transported fully enclosed &mdash; protected from weather and road debris.</p>
+            <span class="card-more" aria-hidden="true">Learn more <span class="arrow">&rarr;</span></span>
+            <div class="card-details" hidden>
+              <p class="svc-lead">Your vehicle rides fully enclosed in a 16&prime; cargo trailer &mdash; out of the weather, away from road debris and out of sight.</p>
+              <h4>What&rsquo;s Included</h4>
+              <ul>
+                <li>Cars, motorcycles, ATVs, UTVs, golf carts and small equipment</li>
+                <li>Enclosed transport that protects paint, chrome and finishes</li>
+                <li>Careful loading and secure tie-downs</li>
+                <li>Pickup and delivery at homes, shops, dealers and storage facilities</li>
+              </ul>
+              <h4>A Good Fit For</h4>
+              <ul>
+                <li>Collector, classic and project cars</li>
+                <li>Dealer, auction and private-sale moves</li>
+                <li>Seasonal moves for bikes and toys</li>
+              </ul>
+              <p class="svc-note">Not sure it&rsquo;ll fit? Send us the make, model and dimensions and we&rsquo;ll confirm.</p>
+            </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-quote="Piano / Specialty Item">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v8H3z"/><path d="M6 6v5M9 6v5M12 6v5M15 6v5M18 6v5"/><path d="M5 14v5M19 14v5"/></svg>
             </div>
-            <h3>Specialty &amp; Fragile Items</h3>
+            <h3><button type="button" class="card-link" aria-haspopup="dialog">Specialty &amp; Fragile Items</button></h3>
             <p>Pianos, furniture, machinery and other items that need careful handling and a secure, enclosed ride.</p>
+            <span class="card-more" aria-hidden="true">Learn more <span class="arrow">&rarr;</span></span>
+            <div class="card-details" hidden>
+              <p class="svc-lead">Some items need more than a strap and a prayer. Pianos, heirloom furniture, machinery and other high-value pieces get careful handling and a secure, enclosed ride.</p>
+              <h4>What&rsquo;s Included</h4>
+              <ul>
+                <li>Pianos, furniture and antiques</li>
+                <li>Machinery, equipment and display pieces</li>
+                <li>Padding, blanket wrap and secure tie-downs</li>
+                <li>Enclosed trailers that shield items from weather</li>
+                <li>Single-item moves &mdash; no need to fill a truck</li>
+              </ul>
+              <h4>A Good Fit For</h4>
+              <ul>
+                <li>Retailers, estate sales and auction houses</li>
+                <li>Businesses relocating equipment</li>
+                <li>Homeowners moving one or two important pieces</li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -257,6 +334,23 @@
     </div>
   </footer>
 
+  <!-- ===== Service detail popup (filled from the clicked card) ===== -->
+  <dialog class="svc-modal" id="svc-modal" aria-labelledby="svc-modal-title">
+    <div class="svc-panel">
+      <button type="button" class="svc-close" data-close aria-label="Close">&times;</button>
+      <div class="svc-head">
+        <div class="card-icon" id="svc-modal-icon"></div>
+        <h2 id="svc-modal-title"></h2>
+      </div>
+      <div class="svc-body" id="svc-modal-body"></div>
+      <div class="svc-actions">
+        <a href="#contact" class="btn" id="svc-modal-quote">Get a Quote</a>
+        <button type="button" class="btn btn-outline" data-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/fx.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

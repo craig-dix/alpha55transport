@@ -8,7 +8,8 @@ Plain HTML/CSS/JS, no build step. Open `index.html` in a browser to view.
 ```
 index.html          single-page site
 css/styles.css      styles (palette pulled from the logo: black, red #d71920, chrome silver)
-js/main.js          mobile nav, scroll reveals, stat counters, quote form
+js/main.js          mobile nav, scroll reveals, stat counters, service popups, quote form
+js/fx.js            hero flames/embers + spark/firework effects (off for reduced-motion users)
 assets/             logo
 ```
 
