@@ -46,7 +46,12 @@
       const p = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - p, 3);
       el.textContent = Math.round(target * eased).toLocaleString() + suffix;
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        const r = el.getBoundingClientRect();
+        window.A55FX.burst(r.left + r.width / 2, r.top + r.height / 2, { count: 40, power: 0.7 });
+      }
     }
     requestAnimationFrame(tick);
   }
@@ -63,8 +68,57 @@
     counters.forEach(function (el) { co.observe(el); });
   }
 
-  // Quote form: no backend yet, so build a pre-filled email to Craig
   const form = document.getElementById("quote-form");
+
+  // Service detail popups
+  const modal = document.getElementById("svc-modal");
+  const modalTitle = document.getElementById("svc-modal-title");
+  const modalIcon = document.getElementById("svc-modal-icon");
+  const modalBody = document.getElementById("svc-modal-body");
+  const modalQuote = document.getElementById("svc-modal-quote");
+
+  function openService(card, e) {
+    modalTitle.textContent = card.querySelector(".card-link").textContent;
+    modalIcon.innerHTML = card.querySelector(".card-icon").innerHTML;
+    modalBody.innerHTML = card.querySelector(".card-details").innerHTML;
+    modalQuote.dataset.quote = card.dataset.quote || "";
+
+    if (!modal.open) {
+      if (typeof modal.showModal === "function") modal.showModal();
+      else modal.setAttribute("open", "");
+    }
+    modal.scrollTop = 0;
+    window.A55FX.mount(modal);
+    let x = e.clientX, y = e.clientY;
+    if (!x && !y) {
+      const r = card.getBoundingClientRect();
+      x = r.left + r.width / 2; y = r.top + r.height / 2;
+    }
+    window.A55FX.burst(x, y, { count: 70, power: 1 });
+  }
+
+  function closeService() {
+    if (typeof modal.close === "function") modal.close();
+    else { modal.removeAttribute("open"); window.A55FX.mount(document.body); }
+  }
+
+  document.querySelectorAll(".card .card-link").forEach(function (btn) {
+    btn.addEventListener("click", function (e) { openService(btn.closest(".card"), e); });
+  });
+  modal.addEventListener("close", function () { window.A55FX.mount(document.body); });
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal || e.target.closest("[data-close]")) closeService();
+  });
+  modalQuote.addEventListener("click", function (e) {
+    e.preventDefault();
+    const type = modalQuote.dataset.quote;
+    if (type) form.elements.type.value = type;
+    closeService();
+    document.getElementById("contact").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    form.elements.name.focus({ preventScroll: true });
+  });
+
+  // Quote form: no backend yet, so build a pre-filled email to Craig
   const status = document.getElementById("form-status");
   const EMAIL_TO = "craig@alpha55transport.com";
 
