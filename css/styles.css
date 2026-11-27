@@ -267,6 +267,7 @@ a { color: inherit; }
 .fleet-body { padding: 1.25rem 1.5rem 1.5rem; }
 .fleet-item h3 { margin: 0 0 0.4rem; font-family: var(--font-display); font-size: 1.45rem; color: var(--silver-light); }
 .fleet-item p { margin: 0; color: var(--muted); }
+.fleet-item .fleet-tag { margin: -0.2rem 0 0.6rem; font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
 .fleet-photo {
   display: block; width: 100%; padding: 0; border: 0; background: #000;
   aspect-ratio: 4 / 3; overflow: hidden; cursor: zoom-in;
