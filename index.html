@@ -25,6 +25,7 @@
         <a href="#services">Services</a>
         <a href="#electric">Why Electric</a>
         <a href="#fleet">Fleet</a>
+        <a href="#insurance">Insurance</a>
         <a href="#area">Service Area</a>
         <a href="#contact" class="btn btn-sm">Get a Quote</a>
       </nav>
@@ -180,6 +181,7 @@
                 <li>Padding, blanket wrap and secure tie-downs</li>
                 <li>Enclosed trailers that shield items from weather</li>
                 <li>Single-item moves &mdash; no need to fill a truck</li>
+                <li>Fully insured, with cargo coverage while your item is in our care</li>
               </ul>
               <h4>A Good Fit For</h4>
               <ul>
@@ -230,19 +232,72 @@
       <div class="container">
         <p class="eyebrow">Equipment</p>
         <h2 class="section-title">Our Fleet</h2>
+        <p class="section-lead">Every vehicle we run is fully electric. Here&rsquo;s the equipment that moves your freight. Tap any photo to enlarge it.</p>
         <div class="fleet-grid">
-          <div class="fleet-item">
-            <h3>2024 Tesla Cyberbeast</h3>
-            <p>Tri-motor, all-wheel-drive electric pickup with serious towing power and zero emissions.</p>
-          </div>
-          <div class="fleet-item">
-            <h3>Two 16&prime; Enclosed Cargo Trailers</h3>
-            <p>Lockable, weatherproof trailers that keep your freight secure, dry and out of sight.</p>
-          </div>
-          <div class="fleet-item">
-            <h3>Up to 7,500 lbs</h3>
-            <p>Plenty of capacity for pallets, machinery, vehicles and oversized one-off items.</p>
-          </div>
+          <article class="fleet-item">
+            <button type="button" class="fleet-photo" data-full="assets/fleet/cyberbeast.jpg">
+              <img src="assets/fleet/cyberbeast.jpg" alt="Alpha55 Transport's matte-black Tesla Cyberbeast with red wheels and company logos" loading="lazy" width="1600" height="1199" />
+            </button>
+            <div class="fleet-body">
+              <h3>2024 Tesla Cyberbeast</h3>
+              <p>Tri-motor, all-wheel-drive electric pickup with serious towing power and zero emissions. Hauls up to 7,500 lbs.</p>
+            </div>
+          </article>
+          <article class="fleet-item">
+            <button type="button" class="fleet-photo" data-full="assets/fleet/cyberbeast-stealth-trailers.jpg">
+              <img src="assets/fleet/cyberbeast-stealth-trailers.jpg" alt="The Cyberbeast parked in front of two black Stealth enclosed cargo trailers" loading="lazy" width="1600" height="994" />
+            </button>
+            <div class="fleet-body">
+              <h3>Two 16&prime; Enclosed Cargo Trailers</h3>
+              <p>Lockable, weatherproof Stealth trailers with E-track and floor D-rings, so freight stays secure, dry and out of sight.</p>
+            </div>
+          </article>
+          <article class="fleet-item">
+            <button type="button" class="fleet-photo" data-full="assets/fleet/cadillac-ev.jpg">
+              <img src="assets/fleet/cadillac-ev.jpg" alt="Red all-electric Cadillac SUV" loading="lazy" width="1600" height="711" />
+            </button>
+            <div class="fleet-body">
+              <h3>All-Electric Cadillac</h3>
+              <p>For smaller, urgent loads like boxed parts, samples and documents, when a trailer would be overkill.</p>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="fleet-subhead">On the Road &amp; Inside the Trailers</h3>
+        <div class="fleet-gallery">
+          <button type="button" class="fleet-photo" data-full="assets/fleet/cyberbeast-trailer-supercharger.jpg">
+            <img src="assets/fleet/cyberbeast-trailer-supercharger.jpg" alt="Cyberbeast towing an enclosed trailer at a Tesla Supercharger" loading="lazy" width="1600" height="1200" />
+          </button>
+          <button type="button" class="fleet-photo" data-full="assets/fleet/trailer-interior-white.jpg">
+            <img src="assets/fleet/trailer-interior-white.jpg" alt="Clean trailer interior with E-track rails, padded side rails and floor tie-down rings" loading="lazy" width="1600" height="1393" />
+          </button>
+          <button type="button" class="fleet-photo" data-full="assets/fleet/trailer-interior-custom.jpg">
+            <img src="assets/fleet/trailer-interior-custom.jpg" alt="Custom-finished trailer interior with LED lighting and protective wall panels" loading="lazy" width="1600" height="1444" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Insurance ===== -->
+    <section class="section section-tight" id="insurance">
+      <div class="container insured">
+        <div class="insured-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+        </div>
+        <div>
+          <p class="eyebrow">Peace of Mind</p>
+          <h2 class="section-title">Fully Insured. Fully Licensed.</h2>
+          <p>
+            Alpha55 Transport carries commercial insurance, including cargo coverage, so your shipment is protected
+            from the moment we pick it up until it&rsquo;s delivered. If something is lost or damaged while in our care,
+            you&rsquo;re covered.
+          </p>
+          <ul class="check-list">
+            <li><strong>Cargo coverage</strong> for freight, parts, vehicles and specialty items in transit.</li>
+            <li><strong>Certificate of insurance</strong> available on request for your records or your customer&rsquo;s.</li>
+            <li><strong>High-value item?</strong> Tell us when you request a quote and we&rsquo;ll confirm coverage before pickup.</li>
+            <li><strong>Federally registered.</strong> USDOT 8050744 &middot; MC 48184496.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -315,6 +370,7 @@
             <label>Approx. Weight (lbs)<input type="number" name="weight" min="0" max="7500" /></label>
           </div>
           <label>Details<textarea name="details" rows="4" placeholder="Dimensions, timing, special handling..."></textarea></label>
+          <p class="form-note">Shipping something high-value? Mention it in the details and we&rsquo;ll confirm insurance coverage before pickup.</p>
           <button type="submit" class="btn btn-block">Send Quote Request</button>
           <p class="form-status" id="form-status" role="status"></p>
         </form>
@@ -329,6 +385,7 @@
       <div class="credentials">
         <span>USDOT 8050744</span>
         <span>MC 48184496</span>
+        <span>Fully Insured</span>
       </div>
       <p class="copyright">&copy; <span id="year"></span> Alpha55 Transport &middot; Oregon, Ohio</p>
     </div>
@@ -348,6 +405,12 @@
         <button type="button" class="btn btn-outline" data-close>Close</button>
       </div>
     </div>
+  </dialog>
+
+  <!-- ===== Fleet photo lightbox ===== -->
+  <dialog class="photo-modal" id="photo-modal" aria-label="Fleet photo">
+    <button type="button" class="svc-close" aria-label="Close">&times;</button>
+    <img id="photo-modal-img" alt="" />
   </dialog>
 
   <script src="js/fx.js"></script>

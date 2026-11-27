@@ -170,4 +170,24 @@
       status.textContent = "Opening your email app… If nothing happens, email us at " + EMAIL_TO + ".";
     }
   });
+
+  // Fleet photo lightbox
+  const photoModal = document.getElementById("photo-modal");
+  const photoImg = document.getElementById("photo-modal-img");
+  function closePhoto() {
+    if (typeof photoModal.close === "function") photoModal.close();
+    else photoModal.removeAttribute("open");
+  }
+  document.querySelectorAll(".fleet-photo").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const thumb = btn.querySelector("img");
+      photoImg.src = btn.dataset.full;
+      photoImg.alt = thumb ? thumb.alt : "";
+      if (typeof photoModal.showModal === "function") photoModal.showModal();
+      else photoModal.setAttribute("open", "");
+    });
+  });
+  photoModal.addEventListener("click", function (e) {
+    if (e.target !== photoImg) closePhoto();
+  });
 })();
